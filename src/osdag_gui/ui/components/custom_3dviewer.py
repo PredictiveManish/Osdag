@@ -60,6 +60,8 @@ class CustomViewer3d(qtViewer3d):
         QTimer.singleShot(100, self._init_python_view_cube)
 
     def _init_python_view_cube(self) -> None:
+        """Initialize the Python-based View Cube widget."""
+        print("DEBUG: Starting View Cube init...")
         try:
             if self._view_cube_enabled:
                 self.python_view_cube_widget = ViewCubeWidget(
@@ -72,9 +74,9 @@ class CustomViewer3d(qtViewer3d):
                     self._on_view_cube_changed
                 )
                 self.python_view_cube_widget.show()
-                print("Python View Cube initialized successfully")
+                print("DEBUG: Python View Cube widget created!")
         except Exception as e:
-            print(f"Failed to initialize Python View Cube: {e}")
+            print(f"DEBUG: Error: {e}")
 
     def _on_view_cube_changed(self, view_name: str) -> None:
         if not self.view:
@@ -82,7 +84,7 @@ class CustomViewer3d(qtViewer3d):
         
         try:
             from osdag_gui.ui.components.view_cube import ChamferedViewCube
-            
+            # adding a gui component
             if view_name in ChamferedViewCube.VIEWS:
                 view_info = ChamferedViewCube.VIEWS[view_name]
                 direction = view_info.direction
